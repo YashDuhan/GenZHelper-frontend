@@ -117,3 +117,94 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* React Select Dark Theme Styles */
+.style-select .select__control {
+  @apply bg-zinc-900 border-zinc-700 !important;
+}
+
+.style-select .select__value-container {
+  @apply !text-zinc-100;
+}
+
+.style-select .select__input-container {
+  @apply !text-zinc-100;
+}
+
+.style-select .select__placeholder {
+  @apply !text-zinc-500;
+}
+
+.style-select .select__menu {
+  @apply !bg-zinc-900 !border !border-zinc-700;
+}
+
+.style-select .select__option {
+  @apply !bg-zinc-900 !text-zinc-100;
+}
+
+.style-select .select__option--is-focused {
+  @apply !bg-zinc-800;
+}
+
+.style-select .select__option--is-selected {
+  @apply !bg-blue-600;
+}
+
+.style-select .select__multi-value {
+  @apply !bg-zinc-800;
+}
+
+.style-select .select__multi-value__label {
+  @apply !text-zinc-100;
+}
+
+.style-select .select__multi-value__remove {
+  @apply !text-zinc-400 hover:!bg-red-500/20 hover:!text-red-400;
+}
+
+.style-select .select__clear-indicator,
+.style-select .select__dropdown-indicator {
+  @apply !text-zinc-400 hover:!text-zinc-200;
+}
+
+/* Slider custom styles */
+@layer components {
+  input[type="range"] {
+    @apply appearance-none bg-zinc-700 h-2 rounded-lg;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    @apply appearance-none w-4 h-4 rounded-full bg-blue-500 cursor-pointer 
+           hover:bg-blue-400 transition-colors;
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    @apply w-4 h-4 rounded-full bg-blue-500 cursor-pointer border-none
+           hover:bg-blue-400 transition-colors;
+  }
+
+  input[type="range"]::-ms-thumb {
+    @apply w-4 h-4 rounded-full bg-blue-500 cursor-pointer
+           hover:bg-blue-400 transition-colors;
+  }
+}
+
+/* Add these to your existing styles */
+@media (max-width: 640px) {
+  .style-select {
+    font-size: 14px;
+  }
+  
+  input[type="range"] {
+    height: 24px; /* Larger touch target */
+  }
+  
+  select, input, textarea {
+    font-size: 16px !important; /* Prevent iOS zoom on focus */
+  }
+  
+  button {
+    min-height: 44px; /* Better touch targets */
+  }
+}
