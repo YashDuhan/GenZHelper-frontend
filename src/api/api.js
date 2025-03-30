@@ -19,12 +19,25 @@ export const convertText = async (requestData) => {
     const rawData = await response.text();
     
     try {
-      // First, try parsing it as a regular JSON
-      const data = JSON.parse(rawData);
+      // Try to parse the response text as JSON
+      let data = JSON.parse(rawData);
       
-      // If it's a string (double-encoded JSON), parse it again
+      // If the data still contains JSON strings (like in your case with ```json\n{...}```)
       if (typeof data === 'string') {
-        return JSON.parse(data);
+        // Remove markdown code block formatting if present
+        if (data.startsWith('```json') || data.startsWith('```')) {
+          // Extract the JSON part from the markdown code block
+          const jsonMatch = data.match(/```(?:json)?\n([\s\S]*?)\n```/);
+          if (jsonMatch && jsonMatch[1]) {
+            data = JSON.parse(jsonMatch[1]);
+          } else {
+            // Just try parsing the string directly if markdown pattern doesn't match
+            data = JSON.parse(data);
+          }
+        } else {
+          // Regular JSON string
+          data = JSON.parse(data);
+        }
       }
       
       return data;
